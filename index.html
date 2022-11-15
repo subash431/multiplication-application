@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication App</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+            font-size: 62.5%;
+        }   
+        body{
+            background-color: aquamarine;
+        }
+        body>   h1{
+            font-size: 3rem;
+            text-align: center;
+            margin-top: 20rem;
+        }
+        form{
+        display: flex;
+        align-items:center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 2rem;background-color: rgb(167, 196, 222);
+        margin-left: 40rem;
+        margin-right: 40rem;
+        margin-top: 2rem;
+        position: relative;padding: 2rem;
+        border-radius: 2rem;
+        }
+        .score{
+            font-size: 1.5rem;
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+        }
+        .container h1{
+            font-size: 3rem;
+        }
+        .container input{
+            font-size: 2rem;
+            width: 40rem;
+            height: 4rem;
+            text-align: center;
+            border-radius: 2rem;
+            border: none;
+            box-shadow: 5px 5px 5px #888888;
+
+        }
+        .btn{
+            font-size: 2rem;
+            padding: 1rem;
+            background-color: antiquewhite;
+            border-radius: 1rem;
+            cursor: pointer;
+            /* margin-top: 2rem; */
+        }
+        .btn:hover{
+            background-color: transparent;
+        }
+    </style>
+</head>
+<body>
+    <h1>Multiplication Application</h1>
+    <div class="container">
+        
+        <form id="form">
+        <h4 class="score" id="score">score: 0</h4>
+        <h1 id="question">What is 1 multiply by 1? </h1>
+
+        <input type="text" class="input" id="input" placeholder="Enter your answer" autofocus autocomplete="off"> <br>
+
+        <button type="submit" class="btn">Submit</button>
+        </form>
+
+    </div>
+    <script>
+        const num1 =Math.ceil(Math.random()*10) ;
+        const num2 =Math.ceil(Math.random()*10) ;
+       const question = document.getElementById("question");
+       const formE = document.getElementById("form");
+       const inputE = document.getElementById("input");
+       const scoreE = document.getElementById('score');
+       const message = document.getElementById('message');
+
+       let score =JSON.parse(localStorage.getItem("score")); 
+
+       if(!score){
+        score =0;
+       }
+    //    if(score == correctAns){
+    //     message.innerHTML = 'Correct Answer';
+    //    }
+       
+       scoreE.innerText = `score: ${score}`;
+
+       question.innerText = `What is ${num1} multiply by ${num2} ?`;
+       
+
+       const correctAns = num1* num2 ;
+
+   
+
+  formE.addEventListener('submit', ()=>{
+        const userAns = +inputE.value;
+       if(userAns ===correctAns){
+        score++
+        updateLocalStorage();
+        // message.innerHTML = 'Wrong Answer';
+       
+       }else{
+        score--
+       
+        updateLocalStorage();
+       }
+    })
+
+    function updateLocalStorage (){
+        localStorage.setItem("score", JSON.stringify(score))
+    }
+
+   
+    
+
+
+
+    </script>
+</body>
+</html>
